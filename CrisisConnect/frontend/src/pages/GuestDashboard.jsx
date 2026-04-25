@@ -6,6 +6,8 @@ const TYPE_ICON = { fire: '🔥', medical: '⚕️', security: '🛡️' };
 const TYPE_COLOR = { fire: 'var(--red)', medical: 'var(--blue)', security: 'var(--orange)' };
 const formatStatus = s => (s || '').replace('_', ' ').toUpperCase();
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
 export default function GuestDashboard() {
   const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
@@ -25,7 +27,7 @@ export default function GuestDashboard() {
   const chatEndRef = useRef(null);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:5001');
+    const newSocket = io(API_URL);
     setSocket(newSocket);
 
     newSocket.on('connect', () => {

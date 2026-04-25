@@ -12,6 +12,8 @@ const PRIORITY_BADGE = { high: 'badge-high', medium: 'badge-medium', low: 'badge
 const PRIORITY_WEIGHT = { high: 3, medium: 2, low: 1 };
 const formatStatus = s => (s || '').replace('_', ' ').toUpperCase();
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
 /* ── Building map constants ────────────────────────────────────── */
 const FLOORS = [4, 3, 2, 1];
 const ROOMS_PER_FLOOR = 6;
@@ -31,7 +33,7 @@ export default function StaffDashboard() {
 
   /* ── Socket setup ─────────────────────────────────────────────── */
   useEffect(() => {
-    const s = io('http://localhost:5001');
+    const s = io(API_URL);
     setSocket(s);
     s.on('connect',        () => { setConn(true); s.emit('join_role', 'staff'); });
     s.on('disconnect',     () => setConn(false));

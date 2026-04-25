@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext(null);
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
 export function AuthProvider({ children }) {
   const [staff, setStaff] = useState(null);       // { name, email, token }
@@ -13,7 +14,7 @@ export function AuthProvider({ children }) {
       try {
         const parsed = JSON.parse(saved);
         // Quick server-side verification to reject expired tokens
-        fetch('http://localhost:5001/api/staff/me', {
+        fetch(`${API_URL}/api/staff/me`, {
           headers: { Authorization: `Bearer ${parsed.token}` },
         })
           .then(r => r.ok ? setStaff(parsed) : logout())
@@ -28,7 +29,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const res = await fetch('http://localhost:5001/api/staff/login', {
+    const res = await fetch(`${API_URL}/api/staff/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),

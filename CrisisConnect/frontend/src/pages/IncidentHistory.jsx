@@ -14,6 +14,8 @@ function formatDuration(ms) {
   return `${minutes}m ${seconds}s`;
 }
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
 export default function IncidentHistory() {
   const { staff } = useAuth();
   const [alerts, setAlerts] = useState([]);
@@ -28,7 +30,7 @@ export default function IncidentHistory() {
 
   useEffect(() => {
     if (!staff?.token) return;
-    fetch('http://localhost:5001/api/alerts', {
+    fetch(`${API_URL}/api/alerts`, {
       headers: { Authorization: `Bearer ${staff.token}` },
     })
       .then(r => {
