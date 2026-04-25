@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext(null);
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) console.error("VITE_API_URL is missing!");
 
 export function AuthProvider({ children }) {
   const [staff, setStaff] = useState(null);       // { name, email, token }

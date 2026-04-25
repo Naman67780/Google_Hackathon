@@ -6,7 +6,8 @@ const TYPE_ICON = { fire: '🔥', medical: '⚕️', security: '🛡️' };
 const TYPE_COLOR = { fire: 'var(--red)', medical: 'var(--blue)', security: 'var(--orange)' };
 const formatStatus = s => (s || '').replace('_', ' ').toUpperCase();
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) console.error("VITE_API_URL is missing!");
 
 export default function GuestDashboard() {
   const [socket, setSocket] = useState(null);

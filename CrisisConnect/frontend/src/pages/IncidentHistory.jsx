@@ -14,7 +14,8 @@ function formatDuration(ms) {
   return `${minutes}m ${seconds}s`;
 }
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) console.error("VITE_API_URL is missing!");
 
 export default function IncidentHistory() {
   const { staff } = useAuth();

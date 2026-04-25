@@ -12,7 +12,8 @@ const PRIORITY_BADGE = { high: 'badge-high', medium: 'badge-medium', low: 'badge
 const PRIORITY_WEIGHT = { high: 3, medium: 2, low: 1 };
 const formatStatus = s => (s || '').replace('_', ' ').toUpperCase();
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) console.error("VITE_API_URL is missing!");
 
 /* ── Building map constants ────────────────────────────────────── */
 const FLOORS = [4, 3, 2, 1];
