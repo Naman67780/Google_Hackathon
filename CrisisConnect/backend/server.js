@@ -14,7 +14,7 @@ const server = http.createServer(app);
 const JWT_SECRET = process.env.JWT_SECRET || 'crisisconnect_jwt_secret_dev';
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || ['http://localhost:5173', 'http://localhost:5174'],
+  origin: true,
   methods: ['GET', 'POST'],
   credentials: true,
 };
